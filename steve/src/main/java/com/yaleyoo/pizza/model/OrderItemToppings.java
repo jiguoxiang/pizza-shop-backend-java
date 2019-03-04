@@ -1,21 +1,22 @@
 package com.yaleyoo.pizza.model;
 
-import javax.annotation.Resource;
 import javax.persistence.*;
 
 @Entity
-public class Sauce {
-    private static final long serialVersionUID = 1L;
+public class OrderItemToppings {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
     @Column(nullable = false)
-    private String name;
+    private long toppingId;
 
     @Column(nullable = false)
-    private int price;
+    private int toppingPrice;
 
     @Column(nullable = false)
-    private String description;
+    private int quantity;
+
+    @Transient
+    private int subtotal;
 }
