@@ -7,15 +7,13 @@ import javax.persistence.*;
 public class Topping {
     private static final long serialVersionUID = 1L;
     @Id
-    @Resource
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    @Resource
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @Resource
+
     @Column(nullable = false)
-    private float price;
+    private int price;
 }

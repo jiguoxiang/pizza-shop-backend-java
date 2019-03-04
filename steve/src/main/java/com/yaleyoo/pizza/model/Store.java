@@ -7,11 +7,21 @@ import javax.persistence.*;
 public class Store {
     private static final long serialVersionUID = 1L;
     @Id
-    @Resource
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    @Resource
     @Column(nullable = false)
-    private String address;
+    private String addressLine1;
+
+    @Column
+    private String addressLine2;
+
+    @Column(nullable = false)
+    private String postcode;
+
+    @Column(nullable = false)
+    private String state;
+
+    @Column(nullable = false)
+    private String country;
 }

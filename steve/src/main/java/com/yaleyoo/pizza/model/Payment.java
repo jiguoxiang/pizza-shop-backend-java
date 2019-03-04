@@ -7,15 +7,13 @@ import javax.persistence.*;
 public class Payment {
     private static final long serialVersionUID = 1L;
     @Id
-    @Resource
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    @Resource
-    @Column(nullable = false)
-    private long orderId;
+    @OneToOne
+    @JoinColumn(name = "order_id", unique = true, referencedColumnName = "id")
+    private Order order;
 
-    @Resource
     @Column(nullable = false, unique = true)
     private String transactionId;
 }

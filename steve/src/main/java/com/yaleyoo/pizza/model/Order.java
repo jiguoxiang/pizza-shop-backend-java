@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.annotation.Resource;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -15,117 +16,54 @@ import java.util.List;
 public class Order {
     private static final long serialVersionUID = 1L;
     @Id
-    @Resource
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     @Column(nullable = false)
     @CreatedDate
-    @Resource
-    private Date createTime;
+    private LocalDate createTime;
 
     @Column(nullable = false)
     @LastModifiedDate
-    @Resource
-    private Date lastUpdateTime;
+    private LocalDate lastUpdateTime;
 
     @Column(nullable = false)
-    @Resource
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @Column(nullable = false)
-    @Resource
-    private String address;
+    private String addressLine1;
+
+    @Column
+    private String addressLine2;
 
     @Column(nullable = false)
-    @Resource
-    private long phoneNumber;
+    private String postcode;
 
     @Column(nullable = false)
-    @Resource
-    private int storeId;
+    private String state;
 
     @Column(nullable = false)
-    @Resource
-    private int staffId;
+    private String country;
 
-    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "id")
+    private Store store;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private List<OrderItem> orderItemList;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    @Transient
+    private int total;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
-
-    public int getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
-    }
-
-//    public List<OrderItem> getOrderItemList() {
-//        return orderItemList;
-//    }
-//
-//    public void setOrderItemList(List<OrderItem> orderItemList) {
-//        this.orderItemList = orderItemList;
-//    }
+    @OneToOne
+    @JoinColumn(name = "voucher_id", referencedColumnName = "id")
+    private Voucher voucher;
 }

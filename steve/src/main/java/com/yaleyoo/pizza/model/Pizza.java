@@ -1,26 +1,33 @@
 package com.yaleyoo.pizza.model;
 
 import javax.annotation.Resource;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
 public class Pizza {
     private static final long serialVersionUID = 1L;
     @Id
-    @Resource
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    @Resource
     @Column(nullable = false)
     private String name;
 
-    @Resource
+    @Column(nullable = false)
+    private PizzaSize pizzaSize;
+
+    @OneToOne
+    @JoinColumn(name = "sauce_id", referencedColumnName = "id")
+    private Sauce sauce;
+
     @Column(nullable = false)
     private float price;
 
-    @Resource
+    @Column(nullable = false)
     private String description;
+
+    @OneToMany
+    @JoinColumn(name = "pizza_id", referencedColumnName = "id")
+    private List<PizzaToppings> toppingsList;
 }
