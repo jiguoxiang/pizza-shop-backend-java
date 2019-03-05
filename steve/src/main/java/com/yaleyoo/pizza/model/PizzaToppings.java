@@ -14,4 +14,28 @@ public class PizzaToppings {
 
     @Column(nullable = false)
     private int quantity;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Topping getTopping() {
+        return topping;
+    }
+
+    public void setTopping(Topping topping) {
+        this.topping = topping;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

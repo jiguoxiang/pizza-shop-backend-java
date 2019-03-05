@@ -1,24 +1,24 @@
-package com.yaleyoo.pizza.model;
+package com.yaleyoo.pizza.dto;
 
-import javax.persistence.*;
+import com.yaleyoo.pizza.model.OrderItemToppings;
 
-@Entity
-public class OrderItemToppings {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+/**
+ * Created by steve on 5/3/19.
+ */
+public class OrderItemToppingsDto {
     private long id;
-
-    @Column(nullable = false)
     private long toppingId;
-
-    @Column(nullable = false)
     private int toppingPrice;
-
-    @Column(nullable = false)
     private int quantity;
-
-    @Transient
     private int subtotal;
+
+    public OrderItemToppingsDto(OrderItemToppings orderItemToppings){
+        this.id = orderItemToppings.getId();
+        this.toppingId = orderItemToppings.getToppingId();
+        this.toppingPrice = orderItemToppings.getToppingPrice();
+        this.quantity = orderItemToppings.getQuantity();
+        this.subtotal = orderItemToppings.getSubtotal();
+    }
 
     public long getId() {
         return id;

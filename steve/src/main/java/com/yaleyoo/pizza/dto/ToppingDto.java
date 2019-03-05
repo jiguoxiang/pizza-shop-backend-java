@@ -1,20 +1,20 @@
-package com.yaleyoo.pizza.model;
+package com.yaleyoo.pizza.dto;
 
-import javax.annotation.Resource;
-import javax.persistence.*;
+import com.yaleyoo.pizza.model.Topping;
 
-@Entity
-public class Topping {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+/**
+ * Created by steve on 5/3/19.
+ */
+public class ToppingDto {
     private long id;
-
-    @Column(nullable = false, unique = true)
     private String name;
-
-
-    @Column(nullable = false)
     private int price;
+
+    public ToppingDto(Topping topping){
+        this.id = topping.getId();
+        this.name = topping.getName();
+        this.price = topping.getPrice();
+    }
 
     public long getId() {
         return id;

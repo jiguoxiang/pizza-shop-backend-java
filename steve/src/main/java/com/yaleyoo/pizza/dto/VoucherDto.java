@@ -1,21 +1,22 @@
-package com.yaleyoo.pizza.model;
+package com.yaleyoo.pizza.dto;
 
-import javax.annotation.Resource;
-import javax.persistence.*;
+import com.yaleyoo.pizza.model.Voucher;
+
 import java.time.LocalDate;
-import java.util.Date;
 
-@Entity
-public class Voucher {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+/**
+ * Created by steve on 5/3/19.
+ */
+public class VoucherDto {
     private long id;
-
-    @Column(nullable = false)
     private boolean used;
-
-    @Column(nullable = false)
     private LocalDate validateDate;
+
+    public VoucherDto(Voucher voucher){
+        this.id = voucher.getId();
+        this.used = voucher.isUsed();
+        this.validateDate = voucher.getValidateDate();
+    }
 
     public long getId() {
         return id;

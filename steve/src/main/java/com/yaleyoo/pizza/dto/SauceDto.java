@@ -1,22 +1,25 @@
-package com.yaleyoo.pizza.model;
+package com.yaleyoo.pizza.dto;
 
-import javax.annotation.Resource;
-import javax.persistence.*;
+import com.yaleyoo.pizza.model.Sauce;
 
-@Entity
-public class Sauce {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+public class SauceDto {
+    private static final long serialVersionUID = 1L;
+
     private long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private int price;
-
-    @Column(nullable = false)
     private String description;
+
+    public SauceDto(Sauce sauce){
+        this.id = sauce.getId();
+        this.name = sauce.getName();
+        this.price = sauce.getPrice();
+        this.description = sauce.getDescription();
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public long getId() {
         return id;
