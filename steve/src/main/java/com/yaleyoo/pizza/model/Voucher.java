@@ -1,9 +1,7 @@
 package com.yaleyoo.pizza.model;
 
-import javax.annotation.Resource;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Voucher {

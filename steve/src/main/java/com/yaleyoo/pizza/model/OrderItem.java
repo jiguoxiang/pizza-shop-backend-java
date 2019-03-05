@@ -1,9 +1,5 @@
 package com.yaleyoo.pizza.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import javax.annotation.Resource;
 import javax.persistence.*;
 import java.util.List;
 

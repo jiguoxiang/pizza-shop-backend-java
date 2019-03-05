@@ -1,13 +1,9 @@
 package com.yaleyoo.pizza.model;
 
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.annotation.Resource;
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
