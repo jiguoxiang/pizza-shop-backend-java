@@ -6,6 +6,7 @@ import com.yaleyoo.pizza.model.PizzaToppings;
 import com.yaleyoo.pizza.model.Sauce;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PizzaDto {
@@ -14,7 +15,7 @@ public class PizzaDto {
     private PizzaSize[] pizzaSizes;
     private String description;
     private SauceDto sauce;
-    private int price;
+    private Map<PizzaSize, Integer> unitPrice;
     private List<PizzaToppingsDto> toppingsList;
 
   public PizzaDto(Pizza pizza) {
@@ -23,8 +24,8 @@ public class PizzaDto {
     this.pizzaSizes = PizzaSize.values();
     this.description = pizza.getDescription();
     this.sauce = new SauceDto(pizza.getSauce());
-    this.price = pizza.getPrice();
     this.toppingsList = pizza.getToppingsList().stream().map(PizzaToppingsDto::new).collect(Collectors.toList());
+    this.unitPrice = pizza.getPizzaUnitPrice();
   }
 
     public long getId() {
@@ -67,19 +68,19 @@ public class PizzaDto {
         this.sauce = sauce;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public List<PizzaToppingsDto> getToppingsList() {
         return toppingsList;
     }
 
     public void setToppingsList(List<PizzaToppingsDto> toppingsList) {
         this.toppingsList = toppingsList;
+    }
+
+    public Map<PizzaSize, Integer> getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Map<PizzaSize, Integer> unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }

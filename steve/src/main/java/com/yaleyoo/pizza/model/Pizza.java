@@ -1,7 +1,9 @@
 package com.yaleyoo.pizza.model;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Pizza {
@@ -12,15 +14,13 @@ public class Pizza {
     @Column(nullable = false)
     private String name;
 
-    @Transient
-    private PizzaSize[] pizzaSizes;
-
     @ManyToOne
     @JoinColumn(name = "sauce_id", referencedColumnName = "id")
     private Sauce sauce;
 
-    @Column(nullable = false)
-    private int price;
+    @OneToMany
+    @JoinColumn(name = "pizza_id")
+    private List<PizzaSizePrice> pizzaSizePrices;
 
     @Column(nullable = false)
     private String description;
@@ -28,6 +28,9 @@ public class Pizza {
     @OneToMany
     @JoinColumn(name = "pizza_id", referencedColumnName = "id")
     private List<PizzaToppings> toppingsList;
+
+    @Transient
+    private Map<PizzaSize, Integer> pizzaUnitPrice;
 
     public long getId() {
         return id;
@@ -45,28 +48,12 @@ public class Pizza {
         this.name = name;
     }
 
-    public PizzaSize[] getPizzaSizes() {
-        return pizzaSizes;
-    }
-
-    public void setPizzaSizes(PizzaSize[] pizzaSizes) {
-        this.pizzaSizes = pizzaSizes;
-    }
-
     public Sauce getSauce() {
         return sauce;
     }
 
     public void setSauce(Sauce sauce) {
         this.sauce = sauce;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public String getDescription() {
@@ -83,5 +70,24 @@ public class Pizza {
 
     public void setToppingsList(List<PizzaToppings> toppingsList) {
         this.toppingsList = toppingsList;
+    }
+
+    public List<PizzaSizePrice> getPizzaSizePrices() {
+        return pizzaSizePrices;
+    }
+
+    public void setPizzaSizePrices(List<PizzaSizePrice> pizzaSizePrices) {
+        this.pizzaSizePrices = pizzaSizePrices;
+    }
+
+    public Map<PizzaSize, Integer> getPizzaUnitPrice() {
+        this.pizzaUnitPrice = new HashMap<>();
+        this.pizzaSizePrices.forEach(sizedPizza -> {
+            int unitPrice = this.sauce.getPrice() + sizedPizza.getPrice();
+            for (PizzaToppings topping : toppingsList) unitPrice += topping.getTopping().getPrice();
+
+            this.pizzaUnitPrice.put(sizedPizza.getPizzaSize(), unitPrice);
+        });
+        return pizzaUnitPrice;
     }
 }

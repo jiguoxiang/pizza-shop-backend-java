@@ -62,6 +62,7 @@ public class Staff {
     private List<Role> roleList;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private StaffStatus staffStatus;
 
     public long getId() {
