@@ -16,9 +16,10 @@ public class PizzaController {
     @Autowired
     private PizzaService pizzaService;
 
-    @RequestMapping("/ad")
+    @RequestMapping("/ad321123")
     public List<Pizza> pizzas(){
-        //aaaaaaaqweqweqwe
+        //aaaaaaaqweqweqwe123
+        /////123123213123
         return pizzaService.getAllPizza();
     }
 }
