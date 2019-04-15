@@ -17,9 +17,11 @@ public class PizzaController {
     private PizzaService pizzaService;
 
     @RequestMapping("/ad321123")
+    @RequestMapping("/ad123123144321")
     public List<Pizza> pizzas(){
         //aaaaaaaqweqweqwe123
         /////123123213123
+        //21312312312
         return pizzaService.getAllPizza();
     }
 }
