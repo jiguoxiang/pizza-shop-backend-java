@@ -16,11 +16,7 @@ public class PizzaController {
     @Autowired
     private PizzaService pizzaService;
 
-    @RequestMapping("/ad123123144321")
-    public List<Pizza> pizzas(){
-        //aaaaaaaqweqweqwe
 
-        /21312312312
         return pizzaService.getAllPizza();
     }
 }
